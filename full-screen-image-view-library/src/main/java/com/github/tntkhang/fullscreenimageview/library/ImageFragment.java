@@ -1,6 +1,5 @@
 package com.github.tntkhang.fullscreenimageview.library;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 public class ImageFragment extends Fragment {
-    private String uri;
+    private String url;
     private static final String EXTRA_URI = "EXTRA_URI";
 
     public static ImageFragment newInstance(String uri) {
@@ -28,13 +27,13 @@ public class ImageFragment extends Fragment {
 
         if (getArguments() != null) {
             String path = getArguments().getString(EXTRA_URI);
-            uri = path;
+            url = path;
         }
         View view = inflater.inflate(R.layout.full_image_item, container, false);
 
         if (view instanceof TouchImageView) {
             Glide.with(this)
-                    .load(uri)
+                    .load(url)
                     .apply(RequestOptions.placeholderOf(R.drawable.nopic_placeholder))
                     .into((TouchImageView)view);
         }
