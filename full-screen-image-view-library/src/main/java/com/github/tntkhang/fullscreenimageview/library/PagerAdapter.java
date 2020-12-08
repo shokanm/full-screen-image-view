@@ -10,18 +10,18 @@ import java.util.List;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    private List<Uri> imagesUri = new ArrayList<>();
+    private List<String> imagesUri = new ArrayList<>();
 
     PagerAdapter(FragmentManager fragmentManager, List<String> images) {
         super(fragmentManager);
         for (String image : images) {
-            this.imagesUri.add(Uri.parse(image));
+            this.imagesUri.add(image);
         }
     }
 
     @Override
     public Fragment getItem(int position) {
-        Uri item = imagesUri.get(position);
+        String item = imagesUri.get(position);
         return ImageFragment.newInstance(item);
     }
 

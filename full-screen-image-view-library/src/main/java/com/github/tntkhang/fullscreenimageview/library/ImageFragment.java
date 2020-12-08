@@ -8,15 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class ImageFragment extends Fragment {
-    private Uri uri;
+    private String uri;
     private static final String EXTRA_URI = "EXTRA_URI";
 
-    public static ImageFragment newInstance(Uri uri) {
+    public static ImageFragment newInstance(String uri) {
         ImageFragment fragment = new ImageFragment();
         Bundle args = new Bundle();
-        args.putString(EXTRA_URI, uri.toString());
+        args.putString(EXTRA_URI, uri);
         fragment.setArguments(args);
         return fragment;
     }
@@ -27,14 +28,14 @@ public class ImageFragment extends Fragment {
 
         if (getArguments() != null) {
             String path = getArguments().getString(EXTRA_URI);
-            uri = Uri.parse(path);
+            uri = path;
         }
         View view = inflater.inflate(R.layout.full_image_item, container, false);
-//        TouchImageView ivContent = view.findViewById(R.id.iv_content);
 
         if (view instanceof TouchImageView) {
             Glide.with(this)
                     .load(uri)
+                    .apply(RequestOptions.placeholderOf(R.drawable.nopic_placeholder))
                     .into((TouchImageView)view);
         }
 
